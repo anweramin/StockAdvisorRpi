@@ -28,7 +28,7 @@ pip install beautifulsoup4
 >> \src 		 --			Source code for the project.
 
 
-##File discriptions       
+##File disctriptions        
 > ``` 
 >>Deamon.py      -- 		Containes the main logic for the scraping routine
 >>stocks.log     -- 		Log for all activites
@@ -38,6 +38,6 @@ pip install beautifulsoup4
 
 
 ## Table of Contents
-* [Installation instuctions](#installationinstuctions)
-* [Folder disctriptions](#folderdisctriptions)
-* [File discriptions](#filediscriptions)
+* [Installation instuctions](#Installation instuctions)
+* [Folder disctriptions](#Folder disctriptions )
+* [File discriptions](#File disctriptions )

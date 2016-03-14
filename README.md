@@ -12,6 +12,11 @@
 A raspberry pi based stock advisor.
 
 
+## Table of Contents
+* [Installation instuctions](#installation-instuctions)
+* [Folder disctriptions](#folder-disctriptions)
+* [File discriptions](#file-disctriptions)
+
 ##Installation instuctions       
 
 Install Python3
@@ -37,7 +42,4 @@ pip install beautifulsoup4
 
 
 
-## Table of Contents
-* [Installation instuctions](#installation-instuctions)
-* [Folder disctriptions](#folder-disctriptions)
-* [File discriptions](#file-disctriptions)
+

@@ -38,6 +38,6 @@ pip install beautifulsoup4
 
 
 ## Table of Contents
-* [Installation instuctions](#Installation instuctions)
-* [Folder disctriptions](#Folder disctriptions )
-* [File discriptions](#File disctriptions )
+* [Installation instuctions](##Installation instuctions)
+* [Folder disctriptions](##Folder disctriptions )
+* [File discriptions](##File disctriptions )

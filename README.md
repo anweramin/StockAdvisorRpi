@@ -29,10 +29,11 @@ pip install beautifulsoup4
 
 
 ##File discriptions       
+> ``` 
 >>Deamon.py      -- 		Containes the main logic for the scraping routine
 >>stocks.log     -- 		Log for all activites
 >>stockData.txt  --			temp data dump at the end of activies. 
-
+> ``` 
 
 
 

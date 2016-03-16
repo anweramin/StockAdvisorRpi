@@ -25,9 +25,15 @@ Install Python3
 open cmd
 run commands:
 ```bash
+sudo apt-get install python3-pip
 pip install selenium
 pip install beautifulsoup4
+pip install pymongo
+pip install pytz
+pip install datetime
+pip install tzlocal
 ```
+
 
 ##Folder disctriptions    
 >> \src 		 --			Source code for the project.
@@ -35,9 +41,11 @@ pip install beautifulsoup4
 
 ##File disctriptions        
 > ``` 
->>Deamon.py      -- 		Containes the main logic for the scraping routine
->>stocks.log     -- 		Log for all activites
->>stockData.txt  --			temp data dump at the end of activies. 
+>>scrapping_deamon   --         main logic for the scraping routine
+>>systemlog.log      --         Log for all activites
+>>Deamon.py          -- 		DEPRICATED::Containes the main logic for the scraping routine
+>>stocks.log         -- 		DEPRICATED::Log for all activites
+>>stockData.txt      --			DEPRICATED::temp data dump at the end of activies. 
 > ``` 
 
 

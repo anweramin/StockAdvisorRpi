@@ -1,3 +1,6 @@
 2016-03-15 21:55:08,309 - __StockAsst.__ - INFO - STARING SCRAPING
 2016-03-15 21:55:23,209 - __StockAsst.__ - INFO - DATA RETRIVED
 2016-03-15 21:55:26,928 - __StockAsst.__ - INFO - Stock record added to DB
+2016-03-26 01:07:44,012 - __StockAsst.__ - INFO - STARING SCRAPING
+2016-03-26 01:08:08,394 - __StockAsst.__ - INFO - DATA RETRIVED
+2016-03-26 01:08:12,278 - __StockAsst.__ - INFO - Stock record added to DB

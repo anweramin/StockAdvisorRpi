@@ -38,6 +38,8 @@ def scraping():
 	stockCatagory = ""
 	marketSummary = []
 	rowlist = []
+	title_arry = ["SYMBOL" ,"LDCP", "OPEN" ,"HIGH" ,"LOW", "CURRENT", "CHANGE", "VOLUME"]
+
 	tables = soup.find_all('tbody')
 	for tbody in tables:
 		rows = tbody.find_all('tr')
@@ -47,10 +49,12 @@ def scraping():
 			del rowlist
 			rowlist = []
 			json_obj = {}
+			counter = 0
 			for data in rowsdata:
 				#print(data.text)
-				rowlist.append(data.text)
-			marketSummary.append(rowlist)
+				json_obj[title_arry[counter]] = data.text
+				counter += 1
+			marketSummary.append(json_obj)
 	#print(marketSummary)
 	driver.quit()
 	logger.info('DATA RETRIVED') 
@@ -81,11 +85,13 @@ client = pymongo.MongoClient('mongodb://stockadvisor:anwer123@ds015919.mlab.com:
 #connect to the rightDB in the cluster
 db = client['stockadvisordb']
 #the stocks object to be inserted
-post = {"stocks": marketsummary,
+post = {
+	   "stocks": marketsummary,
 	   "date": datetime.datetime.now()}
 #get table name, this is only for simplfication for reuse
 stocks = db.stocks
 #perfrom insert operations
 stock_id = stocks.insert_one(post).inserted_id
+print(stock_id)
 #log operation
 logger.info('Stock record added to DB')

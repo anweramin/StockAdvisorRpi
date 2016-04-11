@@ -50,10 +50,16 @@ def scraping():
 			rowlist = []
 			json_obj = {}
 			counter = 0
+			symcnt = 0
 			for data in rowsdata:
 				#print(data.text)
+				if symcnt == 0:
+					sym = data.text
+					symcnt = 1
 				json_obj[title_arry[counter]] = data.text
 				counter += 1
+			# json_obj2 = {}
+			# json_obj2[sym] = json_obj 
 			marketSummary.append(json_obj)
 	#print(marketSummary)
 	driver.quit()

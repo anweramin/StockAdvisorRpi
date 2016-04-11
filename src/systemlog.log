@@ -30,3 +30,29 @@
 2016-04-05 22:25:03,757 - __StockAsst.__ - INFO - STARING SCRAPING
 2016-04-05 22:25:22,949 - __StockAsst.__ - INFO - DATA RETRIVED
 2016-04-05 22:25:27,644 - __StockAsst.__ - INFO - Stock record added to DB
+2016-04-06 00:00:13,075 - __StockAsst.__ - INFO - Notification record added to DB
+2016-04-06 00:00:17,189 - __StockAsst.__ - INFO - Notification record added to DB
+2016-04-06 00:00:20,863 - __StockAsst.__ - INFO - Notification record added to DB
+2016-04-06 00:00:24,632 - __StockAsst.__ - INFO - Notification record added to DB
+2016-04-06 00:00:35,196 - __StockAsst.__ - INFO - Notification record added to DB
+2016-04-06 00:00:38,860 - __StockAsst.__ - INFO - Notification record added to DB
+2016-04-06 00:00:44,991 - __StockAsst.__ - INFO - Notification record added to DB
+2016-04-06 00:02:01,437 - __StockAsst.__ - INFO - Notification record added to DB
+2016-04-06 00:02:04,472 - __StockAsst.__ - INFO - Notification record added to DB
+2016-04-06 00:02:08,320 - __StockAsst.__ - INFO - Notification record added to DB
+2016-04-06 00:02:15,822 - __StockAsst.__ - INFO - Notification record added to DB
+2016-04-06 00:02:19,736 - __StockAsst.__ - INFO - Notification record added to DB
+2016-04-11 18:07:35,120 - __StockAsst.__ - INFO - STARING SCRAPING
+2016-04-11 18:07:59,283 - __StockAsst.__ - INFO - DATA RETRIVED
+2016-04-11 18:08:02,923 - __StockAsst.__ - INFO - Stock record added to DB
+2016-04-11 20:07:36,853 - __StockAsst.__ - INFO - STARING SCRAPING
+2016-04-11 20:10:46,597 - __StockAsst.__ - INFO - STARING SCRAPING
+2016-04-11 20:13:12,918 - __StockAsst.__ - INFO - STARING SCRAPING
+2016-04-11 20:13:37,287 - __StockAsst.__ - INFO - DATA RETRIVED
+2016-04-11 20:13:44,072 - __StockAsst.__ - INFO - Stock record added to DB
+2016-04-11 20:17:57,823 - __StockAsst.__ - INFO - STARING SCRAPING
+2016-04-11 20:20:06,794 - __StockAsst.__ - INFO - STARING SCRAPING
+2016-04-11 20:20:29,379 - __StockAsst.__ - INFO - DATA RETRIVED
+2016-04-11 20:22:12,264 - __StockAsst.__ - INFO - STARING SCRAPING
+2016-04-11 20:22:34,796 - __StockAsst.__ - INFO - DATA RETRIVED
+2016-04-11 20:22:38,309 - __StockAsst.__ - INFO - Stock record added to DB

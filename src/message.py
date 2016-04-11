@@ -19,7 +19,7 @@ logger.addHandler(handler)
 
 
 # Add a notification.
-messagetext = "Some text"
+messagetext = "Some text to check  " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 #connection the the mlab cloud
 client = pymongo.MongoClient('mongodb://stockadvisor:anwer123@ds015919.mlab.com:15919/stockadvisordb?authMechanism=SCRAM-SHA-1')
@@ -29,7 +29,7 @@ db = client['stockadvisordb']
 post = {
 	   
     "body" : messagetext,
-    "sent_flag" : "false",
+    "sent_flag" : False,
     "to" : "03463565843",
 	"date": datetime.datetime.now()
 	}

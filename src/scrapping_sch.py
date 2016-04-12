@@ -100,5 +100,5 @@ while True:
       	schedule.run_pending()
       	time.sleep(1)
    	except Exception as e:
-      	print "Exception occured: ", e
+      	print ("Exception occured: ", e)
 		

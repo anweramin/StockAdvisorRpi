@@ -86,11 +86,14 @@ def graphData(stock,MA1,MA2):
                 if len(splitLine)==6:
                     if 'values' not in eachLine:
                         stockFile.append(eachLine)
-                print(stockFile)
         except Exception as e:
             print(str(e), 'failed to organize pulled data.')
     except Exception as e:
         print(str(e), 'failed to pull pricing data')
+    
+    for st in stockFile:
+        print(st)
+
 
     try:
         date, closep, highp, lowp, openp, volume = np.loadtxt(stockFile,delimiter=',', unpack=True,

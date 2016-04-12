@@ -56,3 +56,8 @@
 2016-04-11 20:22:12,264 - __StockAsst.__ - INFO - STARING SCRAPING
 2016-04-11 20:22:34,796 - __StockAsst.__ - INFO - DATA RETRIVED
 2016-04-11 20:22:38,309 - __StockAsst.__ - INFO - Stock record added to DB
+2016-04-12 18:00:51,898 - __StockAsst.__ - INFO - STARING SCRAPING
+2016-04-12 18:04:36,894 - __StockAsst.__ - INFO - STARING SCRAPING
+2016-04-12 18:08:44,577 - __StockAsst.__ - INFO - STARING SCRAPING
+2016-04-12 18:09:59,615 - __StockAsst.__ - INFO - DATA RETRIVED
+2016-04-12 18:10:41,454 - __StockAsst.__ - INFO - Stock record added to DB

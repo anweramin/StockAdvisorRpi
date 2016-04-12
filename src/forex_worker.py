@@ -9,58 +9,10 @@ import matplotlib.dates as mdates
 from matplotlib.finance import candlestick_ohlc
 import matplotlib
 import pylab
+import mongo_data as mdata
+import forexCal as fx
+
 matplotlib.rcParams.update({'font.size': 9})
-
-def rsiFunc(prices, n=14):
-    deltas = np.diff(prices)
-    seed = deltas[:n+1]
-    up = seed[seed>=0].sum()/n
-    down = -seed[seed<0].sum()/n
-    rs = up/down
-    rsi = np.zeros_like(prices)
-    rsi[:n] = 100. - 100./(1.+rs)
-
-    for i in range(n, len(prices)):
-        delta = deltas[i-1] # cause the diff is 1 shorter
-
-        if delta>0:
-            upval = delta
-            downval = 0.
-        else:
-            upval = 0.
-            downval = -delta
-
-        up = (up*(n-1) + upval)/n
-        down = (down*(n-1) + downval)/n
-
-        rs = up/down
-        rsi[i] = 100. - 100./(1.+rs)
-
-    return rsi
-
-def movingaverage(values,window):
-    weigths = np.repeat(1.0, window)/window
-    smas = np.convolve(values, weigths, 'valid')
-    return smas # as a numpy array
-
-
-def ExpMovingAverage(values, window):
-    weights = np.exp(np.linspace(-1., 0., window))
-    weights /= weights.sum()
-    a =  np.convolve(values, weights, mode='full')[:len(values)]
-    a[:window] = a[window]
-    return a
-
-
-def computeMACD(x, slow=26, fast=12):
-    """
-    compute the MACD (Moving Average Convergence/Divergence) using a fast and slow exponential moving avg'
-    return value is emaslow, emafast, macd which are len(x) arrays
-    """
-    emaslow = ExpMovingAverage(x, slow)
-    emafast = ExpMovingAverage(x, fast)
-    return emaslow, emafast, emafast - emaslow
-
 
 def bytespdate2num(fmt, encoding='utf-8'):
     strconverter = mdates.strpdate2num(fmt)
@@ -76,28 +28,22 @@ def graphData(stock,MA1,MA2):
     '''
     try:
         print('Currently Pulling',stock)
-        urlToVisit = 'http://chartapi.finance.yahoo.com/instrument/1.0/'+stock+'/chartdata;type=quote;range=10y/csv'
         stockFile = []
         try:
-            sourceCode = urllib.request.urlopen(urlToVisit).read().decode()
-            splitSource = sourceCode.split('\n')
-            for eachLine in splitSource:
-                splitLine = eachLine.split(',')
-                if len(splitLine)==6:
-                    if 'values' not in eachLine:
-                        stockFile.append(eachLine)
+           stockFile = mdata.uiFeed(stock)
+
         except Exception as e:
             print(str(e), 'failed to organize pulled data.')
     except Exception as e:
         print(str(e), 'failed to pull pricing data')
     
-    for st in stockFile:
-        print(st)
-
+    # for st in stockFile:
+    #     print(st)
 
     try:
         date, closep, highp, lowp, openp, volume = np.loadtxt(stockFile,delimiter=',', unpack=True,
                                                               converters={ 0: bytespdate2num('%Y%m%d')})
+        # print(date)
         x = 0
         y = len(date)
         newAr = []
@@ -106,8 +52,8 @@ def graphData(stock,MA1,MA2):
             newAr.append(appendLine)
             x+=1
             
-        Av1 = movingaverage(closep, MA1)
-        Av2 = movingaverage(closep, MA2)
+        Av1 = fx.movingaverage(closep, MA1)
+        Av2 = fx.movingaverage(closep, MA2)
 
         SP = len(date[MA2-1:])
             
@@ -116,7 +62,7 @@ def graphData(stock,MA1,MA2):
         ax1 = plt.subplot2grid((6,4), (1,0), rowspan=4, colspan=4, axisbg='#07000d')
         candlestick_ohlc(ax1, newAr[-SP:], width=.6, colorup='#53c156', colordown='#ff1717')
 
-        Label1 = str(MA1)+' SMA'
+        Label1 = str(MA1)+' SMA'   
         Label2 = str(MA2)+' SMA'
 
         ax1.plot(date[-SP:],Av1[-SP:],'#e1edf9',label=Label1, linewidth=1.5)
@@ -144,7 +90,7 @@ def graphData(stock,MA1,MA2):
         volumeMin = 0
         
         ax0 = plt.subplot2grid((6,4), (0,0), sharex=ax1, rowspan=1, colspan=4, axisbg='#07000d')
-        rsi = rsiFunc(closep)
+        rsi = fx.rsiFunc(closep)
         rsiCol = '#c1f9f7'
         posCol = '#386d13'
         negCol = '#8f2020'
@@ -181,8 +127,8 @@ def graphData(stock,MA1,MA2):
         nslow = 26
         nfast = 12
         nema = 9
-        emaslow, emafast, macd = computeMACD(closep)
-        ema9 = ExpMovingAverage(macd, nema)
+        emaslow, emafast, macd = fx.computeMACD(closep)
+        ema9 = fx.ExpMovingAverage(macd, nema)
         ax2.plot(date[-SP:], macd[-SP:], color='#4ee6fd', lw=2)
         ax2.plot(date[-SP:], ema9[-SP:], color='#e1edf9', lw=1)
         ax2.fill_between(date[-SP:], macd[-SP:]-ema9[-SP:], 0, alpha=0.5, facecolor=fillcolor, edgecolor=fillcolor)
@@ -203,11 +149,11 @@ def graphData(stock,MA1,MA2):
         plt.setp(ax0.get_xticklabels(), visible=False)
         plt.setp(ax1.get_xticklabels(), visible=False)
         
-        ax1.annotate('Big news!',(date[510],Av1[510]),
-            xytext=(0.8, 0.9), textcoords='axes fraction',
-            arrowprops=dict(facecolor='white', shrink=0.05),
-            fontsize=14, color = 'w',
-            horizontalalignment='right', verticalalignment='bottom')
+        # ax1.annotate('Big news!',(date[510],Av1[510]),
+        #     xytext=(0.8, 0.9), textcoords='axes fraction',
+        #     arrowprops=dict(facecolor='white', shrink=0.05),
+        #     fontsize=14, color = 'w',
+        #     horizontalalignment='right', verticalalignment='bottom')
 
         plt.subplots_adjust(left=.09, bottom=.14, right=.94, top=.95, wspace=.20, hspace=0)
         plt.show()
@@ -218,4 +164,5 @@ def graphData(stock,MA1,MA2):
 
 while True:
     stock = input('Stock to plot: ')
-    graphData(stock,10,50)
+    # graphData(stock,10,20)
+    graphData(stock,3,5)

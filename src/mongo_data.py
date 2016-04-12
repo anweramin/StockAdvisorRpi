@@ -31,6 +31,18 @@ def getClosingRates(stockSymbol):
 	closep = np.asarray(closep)	
 	return closep
 
+def uiFeed(stockSymbol):
+	puredata = getStockdata(stockSymbol)
+	# print(puredata)
+	stockdata = []
+	for st in puredata:
+		strpdate = st["date"].replace("-","")
+		volume = st["VOLUME"].replace(",","")
+		#values:Date,close,high,low,open,volume
+		setdata = strpdate + "," +st["LDCP"] + "," + st["HIGH"] + "," + st["LOW"] + "," + st["OPEN"] + "," + volume
+		# print(setdata)
+		stockdata.append(setdata)
+	return stockdata
 
 def getstockNameList() :
 	client = pymongo.MongoClient('mongodb://stockadvisor:anwer123@ds015919.mlab.com:15919/stockadvisordb?authMechanism=SCRAM-SHA-1')
@@ -86,4 +98,5 @@ def getStocktest(stockSymbol):
 # stock = getStockdata("Atlas Honda Ltd")
 # getstockNameList()
 # 
-getStocktest("Atlas Honda Ltd")
+# getStocktest("Atlas Honda Ltd")
+# uiFeed("Atlas Honda Ltd")

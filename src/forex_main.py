@@ -42,7 +42,7 @@ def forexRoutine():
 		nl = "\n"
 		# RSI calculation
 		rsiarray = rsi.tolist()
-		
+
 		if rsiarray[len(rsiarray) -1] > 70:
 			messagestr = messagestr + nl + "stock is Overbought"
 			print('stock is Overbought')

@@ -2,8 +2,8 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 import selenium 
 import time
-import logging
-import json
+# import logging
+# import json
 import pymongo
 import datetime
 import tzlocal
@@ -11,23 +11,23 @@ import pytz
 import schedule
 
 ## logging for checking repeated task status and timing
-logger = logging.getLogger("__StockAsst.__")
-logger.setLevel(logging.INFO)
+# logger = logging.getLogger("__StockAsst.__")
+# logger.setLevel(logging.INFO)
 # create a file handler
-handler = logging.FileHandler('systemlog.log')
-handler.setLevel(logging.INFO)
+# handler = logging.FileHandler('systemlog.log')
+# handler.setLevel(logging.INFO)
 # create a logging format
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-handler.setFormatter(formatter)
-# add the handlers to the logger
-logger.addHandler(handler)
-#logger.setLevel(logging.WARNING)
+# formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+# handler.setFormatter(formatter)
+# # add the handlers to the logger
+# logger.addHandler(handler)
+# #logger.setLevel(logging.WARNING)
 
 def scraping():
 	d = datetime.datetime.now()
 	# correction later 9,17
 	if d.hour in range(9,17) and d.isoweekday:
-		logger.info('STARING SCRAPING')
+		# logger.info('STARING SCRAPING')
 		driver = webdriver.Firefox()
 		driver.get('http://www.psx.com.pk/')
 		driver.implicitly_wait(10)
@@ -60,7 +60,7 @@ def scraping():
 					counter += 1
 				marketSummary.append(json_obj)
 		#print(marketSummary)
-		logger.info('DATA RETRIVED') 
+		# logger.info('DATA RETRIVED') 
 		marketsummary = marketSummary
 		###################################
 		#=======DataBase ops==============
@@ -81,7 +81,7 @@ def scraping():
 		stock_id = stocks.insert_one(post).inserted_id
 		print(stock_id)
 		#log operation
-		logger.info('Stock record added to DB')
+		# logger.info('Stock record added to DB')
 
 		print(stock_id)
 		driver.quit()
@@ -94,10 +94,12 @@ def scraping():
 #============================================
 #========== Job sceduling   =================
 #============================================
-schedule.every(10).minutes.do(scraping)
+# schedule.every(10).minutes.do(scraping)
+schedule.every().day.at("13:00").do(forexRoutine) # 01:00 pm 
+
 while True:
 	try:
-      	schedule.run_pending()
+		schedule.run_pending()
       	time.sleep(1)
    	except Exception as e:
       	print ("Exception occured: ", e)

@@ -3,8 +3,11 @@ import mongo_data as mdata
 import forexCal as fx
 import schedule
 import time
+import easygui
 
 def forexRoutine():
+	pnumber = ""
+	pnumber = easygui.enterbox(msg='Enter phone number:', title='Forex plotter ', default='', strip=True)
 	print("Fetching stock data")
 	namelist = mdata.getstockNameList()
 	counter = 0
@@ -39,7 +42,7 @@ def forexRoutine():
 		nl = "\n"
 		# RSI calculation
 		rsiarray = rsi.tolist()
-
+		
 		if rsiarray[len(rsiarray) -1] > 70:
 			messagestr = messagestr + nl + "stock is Overbought"
 			print('stock is Overbought')
@@ -68,18 +71,18 @@ def forexRoutine():
 			print("no noticeable trend change")
 		else:
 		#favorable tread did appear
-			mdata.createSMS(messagestr)
+			mdata.createSMS(messagestr,pnumber)
 			
 		counter+=1
 
 
 # run the forex routine once every 24 hours
 # 
-schedule.every().day.at("23:09").do(forexRoutine)
+# schedule.every().day.at("14:30").do(forexRoutine) #2:30 pm
 # schedule.every(24).hours.do(forexRoutine)
 # while True:
 # 	try:
-# 		schedule.run_pending()
+# 	schedule.run_pending()
 # 		time.sleep(1)
 # 	except Exception as e:
 # 		print ("Exception occured: ", e)

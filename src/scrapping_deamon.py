@@ -2,28 +2,28 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 import selenium 
 import time
-import logging
-import json
+# import logging
+# import simpleJson as json
 import pymongo
 import datetime
 import tzlocal
-import pytz
+# import pytz
 
-## logging for checking repeated task status and timing
-logger = logging.getLogger("__StockAsst.__")
-logger.setLevel(logging.INFO)
-# create a file handler
-handler = logging.FileHandler('systemlog.log')
-handler.setLevel(logging.INFO)
-# create a logging format
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-handler.setFormatter(formatter)
-# add the handlers to the logger
-logger.addHandler(handler)
-#logger.setLevel(logging.WARNING)
+# ## logging for checking repeated task status and timing
+# logger = logging.getLogger("__StockAsst.__")
+# logger.setLevel(logging.INFO)
+# # create a file handler
+# handler = logging.FileHandler('systemlog.log')
+# handler.setLevel(logging.INFO)
+# # create a logging format
+# formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+# handler.setFormatter(formatter)
+# # add the handlers to the logger
+# logger.addHandler(handler)
+# #logger.setLevel(logging.WARNING)
 
 def scraping():
-	logger.info('STARING SCRAPING')
+	# logger.info('STARING SCRAPING')
 	driver = webdriver.Firefox()
 	driver.get('http://www.psx.com.pk/')
 	driver.implicitly_wait(10)
@@ -63,7 +63,7 @@ def scraping():
 			marketSummary.append(json_obj)
 	#print(marketSummary)
 	driver.quit()
-	logger.info('DATA RETRIVED') 
+	# logger.info('DATA RETRIVED') 
 	return marketSummary
 # test loop
 # count = 5
@@ -100,4 +100,4 @@ stocks = db.stocks
 stock_id = stocks.insert_one(post).inserted_id
 print(stock_id)
 #log operation
-logger.info('Stock record added to DB')
+# logger.info('Stock record added to DB')

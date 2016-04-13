@@ -58,18 +58,20 @@ def getstockNameList() :
 	# print(namelist)
 	return namelist
 
-def createSMS(messagebody):
+def createSMS(messagebody,pnumber):
 	# messagetext = "Some text to check  " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 	#connection the the mlab cloud
 	client = pymongo.MongoClient('mongodb://stockadvisor:anwer123@ds015919.mlab.com:15919/stockadvisordb?authMechanism=SCRAM-SHA-1')
 	#connect to the rightDB in the cluster
 	db = client['stockadvisordb']
+	if pnumber == "":
+		pnumber = "03463565843"
 	#the stocks object to be inserted
 	post = {
 	   
     	"body" : messagebody,
     	"sent_flag" : False,
-    	"to" : "03463565843",
+    	"to" : pnumber,
 		"date": datetime.datetime.now()
 		}
 	#get table name, this is only for simplfication for reuse

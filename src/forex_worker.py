@@ -1,5 +1,5 @@
 # THIS VERSION IS FOR PYTHON 3 #
-import urllib.request, urllib.error, urllib.parse
+# import urllib.request, urllib.error, urllib.parse
 import time
 import datetime
 import numpy as np
@@ -11,6 +11,7 @@ import matplotlib
 import pylab
 import mongo_data as mdata
 import forexCal as fx
+import easygui
 
 matplotlib.rcParams.update({'font.size': 9})
 
@@ -60,13 +61,13 @@ def graphData(stock,MA1,MA2):
         fig = plt.figure(facecolor='#07000d')
 
         ax1 = plt.subplot2grid((6,4), (1,0), rowspan=4, colspan=4, axisbg='#07000d')
-        candlestick_ohlc(ax1, newAr[-SP:], width=.6, colorup='#53c156', colordown='#ff1717')
+        candlestick_ohlc(ax1, newAr[-SP:], width=.6, colorup='#2ecc71', colordown='#2c3e50')
 
         Label1 = str(MA1)+' SMA'   
         Label2 = str(MA2)+' SMA'
 
-        ax1.plot(date[-SP:],Av1[-SP:],'#e1edf9',label=Label1, linewidth=1.5)
-        ax1.plot(date[-SP:],Av2[-SP:],'#4ee6fd',label=Label2, linewidth=1.5)
+        ax1.plot(date[-SP:],Av1[-SP:],'#ff1717',label=Label1, linewidth=1.5)
+        ax1.plot(date[-SP:],Av2[-SP:],'#f1c40f',label=Label2, linewidth=1.5)
         
         ax1.grid(True, color='w')
         ax1.xaxis.set_major_locator(mticker.MaxNLocator(10))
@@ -111,7 +112,7 @@ def graphData(stock,MA1,MA2):
         plt.ylabel('RSI')
 
         ax1v = ax1.twinx()
-        ax1v.fill_between(date[-SP:],volumeMin, volume[-SP:], facecolor='#00ffe8', alpha=.4)
+        ax1v.fill_between(date[-SP:],volumeMin, volume[-SP:], facecolor='#2980b9', alpha=.4)
         ax1v.axes.yaxis.set_ticklabels([])
         ax1v.grid(False)
         ###Edit this to 3, so it's a bit larger
@@ -123,14 +124,14 @@ def graphData(stock,MA1,MA2):
         ax1v.tick_params(axis='x', colors='w')
         ax1v.tick_params(axis='y', colors='w')
         ax2 = plt.subplot2grid((6,4), (5,0), sharex=ax1, rowspan=1, colspan=4, axisbg='#07000d')
-        fillcolor = '#00ffe8'
+        fillcolor = '#2980b9'
         nslow = 26
         nfast = 12
         nema = 9
         emaslow, emafast, macd = fx.computeMACD(closep)
         ema9 = fx.ExpMovingAverage(macd, nema)
-        ax2.plot(date[-SP:], macd[-SP:], color='#4ee6fd', lw=2)
-        ax2.plot(date[-SP:], ema9[-SP:], color='#e1edf9', lw=1)
+        ax2.plot(date[-SP:], macd[-SP:], color='#ff1717', lw=2)
+        ax2.plot(date[-SP:], ema9[-SP:], color='#f1c40f', lw=1)
         ax2.fill_between(date[-SP:], macd[-SP:]-ema9[-SP:], 0, alpha=0.5, facecolor=fillcolor, edgecolor=fillcolor)
 
         plt.gca().yaxis.set_major_locator(mticker.MaxNLocator(prune='upper'))
@@ -163,6 +164,10 @@ def graphData(stock,MA1,MA2):
         print('main loop',str(e))
 
 while True:
-    stock = input('Stock to plot: ')
+    # stock = raw_input('Stock to plot: ')
+    # 
+    stock = easygui.enterbox(msg='Stock to plot:', title='Forex plotter ', default='', strip=True)
+    if not stock:
+        break
     # graphData(stock,10,20)
     graphData(stock,3,5)

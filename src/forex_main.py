@@ -19,9 +19,11 @@ def forexRoutine():
 		if counter == 5:
 			break
 		closep = mdata.getClosingRates(stockname)
+		if len(closep) < 26:
+			continue
 		MA5  = fx.movingaverage(closep,5)
 		MA10 = fx.movingaverage(closep,10)
-		EMA5 = fx.ExpMovingAverage(closep,5)
+		EMA7 = fx.ExpMovingAverage(closep,7)
 		EMA10 = fx.ExpMovingAverage(closep,10)
 		rsi = fx.rsiFunc(closep)
 		macd = fx.computeMACD(closep)
@@ -31,8 +33,8 @@ def forexRoutine():
 		print(MA5)
 		print ('MA 10:')
 		print(MA10)
-		print('EMA 5:')
-		print(EMA5)
+		print('EMA 7:')
+		print(EMA7)
 		print('EMA 10:')
 		print(EMA10)
 

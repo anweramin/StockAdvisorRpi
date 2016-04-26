@@ -96,10 +96,12 @@ def scraping():
 #============================================
 # schedule.every(10).minutes.do(scraping)
 schedule.every().day.at("13:00").do(scraping) # 01:00 pm 
+# schedule.every().day.at("09:24").do(scraping) # 01:00 pm 
 
 while True:
 	try:
-		schedule.run_pending()
+		# print("Wait mode")
+		# schedule.run_pending()
 		time.sleep(1)
 	except Exception as e:
    		print ("Exception occured: ", e)

@@ -99,7 +99,8 @@ schedule.every().day.at("13:00").do(scraping) # 01:00 pm
 
 while True:
 	try:
+		print("Wait mode")
 		schedule.run_pending()
-		time.sleep(1)
+		time.sleep(3)
 	except Exception as e:
    		print ("Exception occured: ", e)

@@ -61,7 +61,7 @@ def scraping():
 			# json_obj2 = {}
 			# json_obj2[sym] = json_obj 
 			marketSummary.append(json_obj)
-	#print(marketSummary)
+	print(marketSummary)
 	driver.quit()
 	# logger.info('DATA RETRIVED') 
 	return marketSummary

@@ -77,6 +77,26 @@ def forexRoutine():
 			
 		# counter+=1
 
+		# with open('forex_res.txt', 'w') as outfile:
+		# 	outfile.write("")
+		# 	outfile.close()
+
+		# with open('forex_res.txt', 'a') as outfile:
+		#  	outfile.write('Stock Name: ' + stockname)
+		#  	outfile.write ('\nMA 5:')
+		#  	outfile.write(MA5.tolist())
+		#  	outfile.write ('\nMA 10:')
+		#  	outfile.write(MA10.tolist())
+		#  	outfile.write('\nEMA 7:')
+		#  	outfile.write(EMA7.tolist())
+		#  	outfile.write('\nEMA 10:')
+		#  	outfile.write(EMA10.tolist())
+		#  	outfile.write('\nRSI:')
+		#  	outfile.write(rsi.tolist())
+		#  	outfile.write('\nMACD:')
+		#  	outfile.write(macd.tolist())
+		#  	outfile.close()
+
 
 # run the forex routine once every 24 hours
 # 
